@@ -4,4 +4,6 @@ import Featured from "./Featured";
 import Footer from "./Footer";
 import Hero from "./HeroSec";
 import Navbar from "./Navbar";
-export { Navbar, Hero, Category, ChatBot, Footer , Featured };
+import Notification from "./Notification";
+
+export { Navbar, Hero, Category, ChatBot, Footer, Featured, Notification };

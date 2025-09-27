@@ -4,9 +4,8 @@ const Footer = () => {
   return (
     <footer className="bg-green-700 text-white py-10 mt-10">
       <div className="container mx-auto px-6 md:px-12 lg:px-20">
-        {/* UPPER GRID */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-          {/* ABOUT */}
+          {/* UPPER */}
           <div>
             <h2 className="text-lg font-semibold mb-4">About Plant Haven</h2>
             <p className="text-sm text-gray-200 leading-relaxed">
@@ -16,7 +15,6 @@ const Footer = () => {
             </p>
           </div>
 
-          {/* QUICK LINKS */}
           <div>
             <h2 className="text-lg font-semibold mb-4">Quick Links</h2>
             <ul className="space-y-2">
@@ -43,7 +41,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* CONTACT */}
           <div>
             <h2 className="text-lg font-semibold mb-4">Contact Us</h2>
             <ul className="space-y-2 text-sm text-gray-200">
@@ -54,7 +51,7 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* BOTTOM BAR */}
+        {/* BOTTOM */}
         <div className="flex flex-col md:flex-row justify-between items-center border-t border-green-600 pt-6">
           <p className="text-sm text-gray-200">
             &copy; {new Date().getFullYear()} Plant Haven. All rights reserved.

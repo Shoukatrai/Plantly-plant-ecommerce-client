@@ -4,7 +4,7 @@ import { FiSearch } from "react-icons/fi";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import { Link } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ setIsOpenNotification }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -53,7 +53,10 @@ const Navbar = () => {
           </button>
 
           <div className="relative">
-            <button className="cursor-pointer hover:text-gray-200">
+            <button
+              className="cursor-pointer hover:text-gray-200"
+              onClick={() => setIsOpenNotification((prev) => !prev)}
+            >
               <IoIosNotificationsOutline className="size-7" />
             </button>
             <span className="absolute -top-1 -right-2 bg-red-500 text-xs px-1 rounded-full">

@@ -1,10 +1,28 @@
-import React from "react";
-import { Category, ChatBot, Featured, Footer, Hero, Navbar } from "../../components";
+import React, { useState } from "react";
+import {
+  Category,
+  ChatBot,
+  Featured,
+  Footer,
+  Hero,
+  Navbar,
+  Notification,
+} from "../../components";
 
 const Home = () => {
+  const [isOpenNotification, setIsOpenNotification] = useState(false);
+  const onCloseNotification = () => {
+    setIsOpenNotification(false);
+  };
   return (
     <>
-      <Navbar />
+      <Navbar setIsOpenNotification={setIsOpenNotification} />
+      {isOpenNotification && (
+        <Notification
+          isOpen={isOpenNotification}
+          onClose={onCloseNotification}
+        />
+      )}
       <Hero />
       <Featured />
       <Category />

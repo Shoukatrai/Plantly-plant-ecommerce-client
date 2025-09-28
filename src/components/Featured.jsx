@@ -88,7 +88,7 @@ const Featured = () => {
                     ⭐ {plant.rating} | {plant.inStock} in stock
                   </div>
                 </div>
-                <button className="cursor-pointer mx-auto md:mx-0 bg-green-700 px-6 py-3 rounded-4xl mb-3 text-white font-medium hover:bg-green-800 transition">Add to Cart</button>
+                <button className="cursor-pointer mx-auto md:mx-0 bg-green-700 px-6 py-2.5 rounded-4xl mb-3 text-white font-medium hover:bg-green-800 transition">Add to Cart</button>
               </div>
           );
         })}

@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { apiEndPoints } from "../constant/apiEndPoints";
+import { BASE_URL } from "../utils";
+import axios from "axios";
 
 const featuredPlants = [
   {
@@ -49,6 +52,19 @@ const featuredPlants = [
 ];
 
 const Featured = () => {
+  const [plants, setPlants] = useState([]);
+  const fetchPlants = async () => {
+    try {
+      const api = `${BASE_URL}${apiEndPoints.getAllPlants}`;
+      const res = await axios.get(api);
+      setPlants(res.data.slice(0, 4)); 
+    } catch (err) {
+      console.error("Error fetching plant:", err);
+    }
+  };
+  useEffect(() => {
+    fetchPlants();
+  }, []);
   return (
     <section className="px-6 md:px-12 lg:px-20 py-10">
       <h2 className="text-2xl font-semibold mb-8 text-center">
@@ -56,7 +72,7 @@ const Featured = () => {
       </h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-        {featuredPlants.map((plant) => {
+        {plants.map((plant) => {
           const discountedPrice =
             plant.discount > 0
               ? (plant.price - (plant.price * plant.discount) / 100).toFixed(2)
@@ -67,7 +83,7 @@ const Featured = () => {
               <div className="flex flex-col items-center justify-between text-center gap-4 bg-gray-100 rounded-xl shadow-md hover:shadow-lg transition h-[450px]">
                 {/* IMAGE */}
                 <img
-                  src={plant.image}
+                  src={plant.imageUrl}
                   alt={plant.name}
                   className="w-full h-48 object-cover rounded-t-xl"
                 />

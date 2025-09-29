@@ -1,20 +1,44 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { BASE_URL, toastAlert } from "../../utils";
+import { apiEndPoints } from "../../constant/apiEndPoints";
+import axios from "axios";
+import Cookies from 'js-cookie'
 
 const Login = () => {
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
-
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Signup data:", form);
-    // 🔥 TODO: Send `form` to backend API
+    try {
+      setLoading(true);
+      const api = `${BASE_URL}${apiEndPoints.login}`;
+      const userRes = await axios.post(api, form);
+      console.log("userRes", userRes);
+      Cookies.set("token" , userRes.data.token)
+      toastAlert({
+        type: "success",
+        message: userRes.data.message,
+      });
+      setLoading(false);
+      navigate("/");
+    } catch (error) {
+      toastAlert({
+        type: "error",
+        message: error.message,
+      });
+      setLoading(false);
+      console.log("error", error);
+    }
   };
 
   return (
@@ -51,7 +75,7 @@ const Login = () => {
           type="submit"
           className="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition cursor-pointer"
         >
-          Login
+          {loading ? "Loading..." : "Login"}
         </button>
 
         <p className="text-center text-sm text-gray-600">

@@ -1,22 +1,46 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { BASE_URL, toastAlert } from "../../utils";
+import { apiEndPoints } from "../../constant/apiEndPoints";
+import axios from "axios";
 
 const Signup = () => {
+  const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
     name: "",
     email: "",
-    phone: "",
+    phoneNumber: "",
     password: "",
+    role: "",
   });
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Signup data:", form);
-    // 🔥 TODO: Send `form` to backend API
+    try {
+      setLoading(true);
+      const api = `${BASE_URL}${apiEndPoints.signup}`;
+      const userRes = await axios.post(api, form);
+      console.log("userRes", userRes);
+      toastAlert({
+        type: "success",
+        message: userRes.data.message,
+      });
+      setLoading(false);
+      navigate("/login");
+    } catch (error) {
+      toastAlert({
+        type: "error",
+        message: error.message,
+      });
+      setLoading(false);
+      console.log("error", error);
+    }
   };
 
   return (
@@ -51,9 +75,9 @@ const Signup = () => {
 
         <input
           type="tel"
-          name="phone"
+          name="phoneNumber"
           placeholder="Phone Number"
-          value={form.phone}
+          value={form.phoneNumber}
           onChange={handleChange}
           className="w-full px-4 py-2 border rounded focus:ring focus:outline-none"
           required
@@ -73,7 +97,7 @@ const Signup = () => {
           type="submit"
           className="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition cursor-pointer"
         >
-          Sign Up
+          {loading ? "Loading..." : "Sign Up"}
         </button>
 
         <p className="text-center text-sm text-gray-600">

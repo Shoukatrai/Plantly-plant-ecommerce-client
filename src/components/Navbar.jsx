@@ -5,6 +5,8 @@ import { IoIosNotificationsOutline } from "react-icons/io";
 import { Link } from "react-router-dom";
 import Cart from "./Cart";
 import Notification from "./Notification";
+import Cookies from "js-cookie";
+import { CgProfile } from "react-icons/cg";
 
 const Navbar = ({ setIsOpenNotification }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false); // for mobile menu
@@ -57,50 +59,108 @@ const Navbar = ({ setIsOpenNotification }) => {
             <FiSearch className="size-5 cursor-pointer" />
           </div>
 
-          {/* NOTIFICATIONS */}
-          <div className="relative">
-            <button
-              className="cursor-pointer hover:text-gray-200"
-              onClick={() => setIsNotificationOpen((prev) => !prev)}
-            >
-              <IoIosNotificationsOutline className="size-7" />
-            </button>
-            <span className="absolute -top-1 -right-2 bg-red-500 text-xs px-1 rounded-full">
-              10
-            </span>
-          </div>
+          {Cookies.get("token") ? (
+            <div className="flex items-center space-x-6">
+              <div className="relative">
+                <button
+                  className="cursor-pointer hover:text-gray-200"
+                  onClick={() => setIsNotificationOpen((prev) => !prev)}
+                >
+                  <IoIosNotificationsOutline className="size-7" />
+                </button>
+                <span className="absolute -top-1 -right-2 bg-red-500 text-xs px-1 rounded-full">
+                  10
+                </span>
+              </div>
 
-          {/* CART */}
-          <div className="relative">
-            <button
-              className="cursor-pointer hover:text-gray-200"
-              onClick={() => setIsCartOpen(true)}
-            >
-              <CiShoppingCart className="size-7" />
-            </button>
-            <span className="absolute -top-1 -right-2 bg-red-500 text-xs px-1 rounded-full">
-              10
-            </span>
-          </div>
+              <div className="relative">
+                <button
+                  className="cursor-pointer hover:text-gray-200"
+                  onClick={() => setIsCartOpen(true)}
+                >
+                  <CiShoppingCart className="size-7" />
+                </button>
+                <span className="absolute -top-1 -right-2 bg-red-500 text-xs px-1 rounded-full">
+                  10
+                </span>
+              </div>
+              <div className="relative group">
+                <button className="cursor-pointer hover:text-gray-200 top-5">
+                  <CgProfile className="size-6" />
+                </button>
+                <div className="absolute right-0 mt-2 w-40 bg-white text-black rounded shadow-lg opacity-0 group-hover:opacity-100 transition">
+                  <Link
+                    to="/profile"
+                    className="block px-4 py-2 hover:bg-gray-100"
+                  >
+                    Profile
+                  </Link>
+                  <Link
+                    to="/orders"
+                    className="block px-4 py-2 hover:bg-gray-100"
+                  >
+                    Orders
+                  </Link>
+                  <button
+                    onClick={() => {
+                      Cookies.remove("token");
+                      window.location.reload();
+                    }}
+                    className="w-full text-left px-4 py-2 hover:bg-gray-100"
+                  >
+                    Logout
+                  </button>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="flex items-center space-x-4">
+              <Link to="/signup" className="hover:font-bold">
+                SignUp
+              </Link>
+              <Link to="/login" className="hover:font-bold">
+                Login
+              </Link>
+            </div>
+          )}
         </div>
       </div>
 
       {/* MOBILE MENU */}
       {isMenuOpen && (
         <div className="flex flex-col gap-6 bg-green-700 text-white p-4 md:hidden items-center">
-          <Link to="/" onClick={() => setIsMenuOpen(false)} className="hover:font-bold">
+          <Link
+            to="/"
+            onClick={() => setIsMenuOpen(false)}
+            className="hover:font-bold"
+          >
             Home
           </Link>
-          <Link to="/shop" onClick={() => setIsMenuOpen(false)} className="hover:font-bold">
+          <Link
+            to="/shop"
+            onClick={() => setIsMenuOpen(false)}
+            className="hover:font-bold"
+          >
             Shop
           </Link>
-          <Link to="/about" onClick={() => setIsMenuOpen(false)} className="hover:font-bold">
+          <Link
+            to="/about"
+            onClick={() => setIsMenuOpen(false)}
+            className="hover:font-bold"
+          >
             About
           </Link>
-          <Link to="/contact" onClick={() => setIsMenuOpen(false)} className="hover:font-bold">
+          <Link
+            to="/contact"
+            onClick={() => setIsMenuOpen(false)}
+            className="hover:font-bold"
+          >
             Contact
           </Link>
-          <button onClick={() => setIsCartOpen(true)} className="hover:font-bold">
+          <button
+            onClick={() => setIsCartOpen(true)}
+            className="hover:font-bold"
+          >
             Cart (10)
           </button>
         </div>

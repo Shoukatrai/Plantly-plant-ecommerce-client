@@ -63,7 +63,8 @@ const Featured = () => {
               : plant.price;
 
           return (
-              <div key={plant.id} className="flex flex-col items-center justify-between text-center gap-4 bg-gray-100 rounded-xl shadow-md hover:shadow-lg transition h-[450px]">
+            <Link to={`/plants/${plant.id}`} key={plant.id}>
+              <div className="flex flex-col items-center justify-between text-center gap-4 bg-gray-100 rounded-xl shadow-md hover:shadow-lg transition h-[450px]">
                 {/* IMAGE */}
                 <img
                   src={plant.image}
@@ -73,7 +74,9 @@ const Featured = () => {
                 {/* TEXT */}
                 <div className="p-4 flex flex-col gap-2">
                   <h3 className="font-semibold text-lg">{plant.name}</h3>
-                  <p className="text-gray-600 text-sm overflow-hidden">{plant.description}</p>
+                  <p className="text-gray-600 text-sm overflow-hidden">
+                    {plant.description}
+                  </p>
 
                   <div className="text-green-700 font-medium">
                     {plant.discount > 0 && (
@@ -88,8 +91,9 @@ const Featured = () => {
                     ⭐ {plant.rating} | {plant.inStock} in stock
                   </div>
                 </div>
-                <button className="cursor-pointer mx-auto md:mx-0 bg-green-700 px-6 py-2.5 rounded-4xl mb-3 text-white font-medium hover:bg-green-800 transition">Add to Cart</button>
+                {/* <button className="cursor-pointer mx-auto md:mx-0 bg-green-700 px-6 py-2.5 rounded-4xl mb-3 text-white font-medium hover:bg-green-800 transition">Add to Cart</button> */}
               </div>
+            </Link>
           );
         })}
       </div>

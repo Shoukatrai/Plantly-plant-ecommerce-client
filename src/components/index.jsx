@@ -1,3 +1,4 @@
+import CartCard from "./Cards/CartCard";
 import ProductCard from "./Cards/ProductCard";
 import Category from "./Category";
 import ChatBot from "./ChatBot";
@@ -20,4 +21,5 @@ export {
   Filter,
   ProductList,
   ProductCard,
+  CartCard,
 };

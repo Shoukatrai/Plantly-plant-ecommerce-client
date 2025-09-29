@@ -6,23 +6,13 @@ import {
   Footer,
   Hero,
   Navbar,
-  Notification,
 } from "../../components";
 
 const Home = () => {
-  const [isOpenNotification, setIsOpenNotification] = useState(false);
-  const onCloseNotification = () => {
-    setIsOpenNotification(false);
-  };
   return (
     <>
-      <Navbar setIsOpenNotification={setIsOpenNotification} />
-      {isOpenNotification && (
-        <Notification
-          isOpen={isOpenNotification}
-          onClose={onCloseNotification}
-        />
-      )}
+      <Navbar />
+
       <Hero />
       <Featured />
       <Category />

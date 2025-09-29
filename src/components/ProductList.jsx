@@ -37,18 +37,13 @@ const products = [
   },
 ];
 
-const ProductList = () => {
-  if (products.length === 0) {
-    return (
-      <div className="text-center text-gray-500 py-10">
-        No products available.
-      </div>
-    );
-  }
+const ProductList = ({ products }) => {
+  console.log("products", products);
+  
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-      {products.map((product) => (
+      {products?.map((product) => (
         <ProductCard key={product.id} plant={product} />
       ))}
     </div>

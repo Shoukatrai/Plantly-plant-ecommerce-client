@@ -11,7 +11,7 @@ const ProductCard = ({ plant }) => {
     <div className="flex flex-col items-center justify-between text-center gap-4 bg-gray-100 rounded-xl shadow-md hover:shadow-lg transition h-[450px]">
       {/* IMAGE */}
       <img
-        src={plant.image}
+        src={plant.imageUrl}
         alt={plant.name}
         className="w-full h-48 object-cover rounded-t-xl"
       />

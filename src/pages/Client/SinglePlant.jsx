@@ -1,27 +1,54 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Footer, Navbar } from "../../components";
-import { BASE_URL } from "../../utils";
+import { BASE_URL, toastAlert } from "../../utils";
 import { apiEndPoints } from "../../constant/apiEndPoints";
 import axios from "axios";
-
+import Cookies from "js-cookie";
 const SinglePlant = () => {
   const { id } = useParams();
   const [plant, setPlant] = useState(null);
   const [quantity, setQuantity] = useState(1);
-
+  const fetchPlant = async () => {
+    try {
+      const api = `${BASE_URL}${apiEndPoints.getSinglePlant}/${id}`;
+      const res = await axios.get(api);
+      setPlant(res.data);
+    } catch (err) {
+      console.error("Error fetching plant:", err);
+    }
+  };
   useEffect(() => {
-    const fetchPlant = async () => {
-      try {
-        const api = `${BASE_URL}${apiEndPoints.getSinglePlant}/${id}`;
-        const res = await axios.get(api);
-        setPlant(res.data);
-      } catch (err) {
-        console.error("Error fetching plant:", err);
-      }
-    };
     fetchPlant();
   }, [id]);
+
+  const addToCart = async (plantId, quantity) => {
+    try {
+      console.log(plantId, quantity);
+      const obj = {
+        plantId,
+        quantity,
+      };
+      const api = `${BASE_URL}${apiEndPoints.addToCart}`;
+      const response = await axios.post(api, obj, {
+        headers: {
+          Authorization: `Bearer ${Cookies.get("token")}`,
+        },
+      });
+
+      console.log("response", response);
+      toastAlert({
+        type: "success",
+        message: "Added to Cart!",
+      });
+    } catch (error) {
+      console.log(error.message);
+      toastAlert({
+        type: "error",
+        message: error.message,
+      });
+    }
+  };
 
   if (!plant) return <p className="text-center mt-10">Loading...</p>;
 
@@ -87,7 +114,7 @@ const SinglePlant = () => {
             </button>
             <button
               className="border-none text-green-700 hover:underline cursor-pointer"
-              onClick={() => console.log("Add to Cart", plant.id, quantity)}
+              onClick={() => addToCart(plant?.id, quantity)}
             >
               Add to Cart
             </button>

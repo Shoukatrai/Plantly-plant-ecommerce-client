@@ -9,7 +9,7 @@ import Hero from "./HeroSec";
 import Navbar from "./Navbar";
 import Notification from "./Notification";
 import ProductList from "./ProductList";
-
+import SellerLayout from "./SellerLayout/SellerLayout";
 export {
   Navbar,
   Hero,
@@ -22,4 +22,5 @@ export {
   ProductList,
   ProductCard,
   CartCard,
+  SellerLayout,
 };

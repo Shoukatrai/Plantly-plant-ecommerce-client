@@ -1,6 +1,13 @@
 import { Route, Routes } from "react-router-dom";
 import { Footer, Hero, Navbar } from "./components";
-import { Category, Home, Login, Signup, SinglePlant } from "./pages";
+import {
+  Category,
+  Home,
+  Login,
+  SellerDashboard,
+  Signup,
+  SinglePlant,
+} from "./pages";
 import { Bounce, ToastContainer } from "react-toastify";
 import UserRoutes from "./routes/userRoutes"; // <-- make sure this exists
 
@@ -16,6 +23,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/seller_dashboard" element={<SellerDashboard />} />
       </Routes>
       {/* <Footer /> */}
       <ToastContainer

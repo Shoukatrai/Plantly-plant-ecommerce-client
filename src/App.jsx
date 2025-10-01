@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-import { Footer, Hero, Navbar } from "./components";
 import {
   Category,
   Home,
@@ -9,12 +8,15 @@ import {
   SinglePlant,
 } from "./pages";
 import { Bounce, ToastContainer } from "react-toastify";
-import UserRoutes from "./routes/userRoutes"; // <-- make sure this exists
+import UserRoutes from "./routes/userRoutes";
+import SellerCategory from "./pages/seller/SellerCategory";
+import SellerOrders from "./pages/seller/SellerOrders";
+import SellerPlants from "./pages/seller/SellerPlants.jsx";
+import SellerClients from "./pages/seller/SellerClients";
 
 function App() {
   return (
     <>
-      {/* <Navbar /> */}
       <Routes>
         <Route element={<UserRoutes />}>
           <Route path="/categories/:id" element={<Category />} />
@@ -24,8 +26,11 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/seller_dashboard" element={<SellerDashboard />} />
+        <Route path="/seller_categories" element={<SellerCategory />} />
+        <Route path="/seller_orders" element={<SellerOrders />} />
+        <Route path="/seller_plants" element={<SellerPlants />} />
+        <Route path="/seller_clients" element={<SellerClients />} />
       </Routes>
-      {/* <Footer /> */}
       <ToastContainer
         position="top-right"
         autoClose={5000}

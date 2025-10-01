@@ -8,8 +8,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const menuItems = [
     { name: "Dashboard", path: "/seller_dashboard" },
     { name: "Orders", path: "/seller_orders" },
-    { name: "Products", path: "/seller_products" },
-    { name: "Settings", path: "/seller_settings" },
+    { name: "Plants", path: "/seller_plants" },
+    { name: "Categories", path: "/seller_categories" },
+    { name: "Clients", path: "/seller_clients" },
   ];
 
   return (
@@ -18,7 +19,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
         ${sidebarOpen ? "translate-x-0 " : "-translate-x-full"} 
         transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0`}
     >
-      {/* Top Bar with Close Button */}
       <div className="flex items-center justify-between h-16 px-4 border-b border-gray-200">
         <h1 className="text-xl font-bold">Plantly</h1>
         <button
@@ -29,7 +29,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
         </button>
       </div>
 
-      {/* Menu Items */}
       <nav className="p-4 space-y-2">
         {menuItems.map((item) => {
           const isActive = location.pathname === item.path;

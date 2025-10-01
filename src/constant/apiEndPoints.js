@@ -6,4 +6,5 @@ export const apiEndPoints = {
   getSinglePlant: "product",
   getAllPlants: "product/all-plants",
   addToCart: "cart",
+  getAllCarts: "cart",
 };

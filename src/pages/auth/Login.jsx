@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL, toastAlert } from "../../utils";
 import { apiEndPoints } from "../../constant/apiEndPoints";
 import axios from "axios";
-import Cookies from 'js-cookie'
+import Cookies from "js-cookie";
 
 const Login = () => {
   const [form, setForm] = useState({
@@ -24,7 +24,7 @@ const Login = () => {
       const api = `${BASE_URL}${apiEndPoints.login}`;
       const userRes = await axios.post(api, form);
       console.log("userRes", userRes);
-      Cookies.set("token" , userRes.data.token)
+      Cookies.set("token", userRes.data.token);
       toastAlert({
         type: "success",
         message: userRes.data.message,
@@ -34,7 +34,7 @@ const Login = () => {
     } catch (error) {
       toastAlert({
         type: "error",
-        message: error.message,
+        message: error.response.data.message,
       });
       setLoading(false);
       console.log("error", error);

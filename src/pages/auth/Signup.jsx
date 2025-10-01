@@ -11,7 +11,7 @@ const Signup = () => {
     email: "",
     phoneNumber: "",
     password: "",
-    role: "",
+    role: "role",
   });
   const navigate = useNavigate();
 
@@ -36,7 +36,7 @@ const Signup = () => {
     } catch (error) {
       toastAlert({
         type: "error",
-        message: error.message,
+        message: error.response.data.message,
       });
       setLoading(false);
       console.log("error", error);
@@ -92,6 +92,17 @@ const Signup = () => {
           className="w-full px-4 py-2 border rounded focus:ring focus:outline-none"
           required
         />
+        <select
+          name="role"
+          className="w-full px-4 py-2 border rounded focus:ring focus:outline-none"
+          value={form.role}
+          onChange={handleChange}
+          required
+        >
+          <option value="">Select Role</option>
+          <option value="user">User</option>
+          <option value="seller">Seller</option>
+        </select>
 
         <button
           type="submit"

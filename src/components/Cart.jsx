@@ -1,17 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { CartCard } from "../components";
+import axios from "axios";
+import { BASE_URL } from "../utils";
+import { apiEndPoints } from "../constant/apiEndPoints";
+import Cookies from "js-cookie";
 
-const Cart = ({ onClose, isOpen, cartItems = [] }) => {
+const Cart = ({ onClose, isOpen }) => {
+  const [cartItems, setCartItems] = useState([]);
+
+  const getAllCart = async () => {
+    try {
+      const api = `${BASE_URL}${apiEndPoints.getAllCarts}`;
+      const carts = await axios.get(api, {
+        headers: {
+          Authorization: `Bearer ${Cookies.get("token")}`,
+        },
+      });
+      carts.data.map((item) => {
+        setCartItems(item?.items);
+      });
+    } catch (error) {}
+  };
+  // console.log("cartItems", cartItems);
+  useEffect(() => {
+    getAllCart();
+  });
   return (
     <aside
       className={`fixed top-0 right-0 h-full w-3/4 md:w-1/3 lg:w-1/4 bg-green-50 shadow-lg border-l border-green-200 flex flex-col z-50 transform transition-transform duration-300 ${
         isOpen ? "translate-x-0" : "translate-x-full"
       }`}
     >
-      {/* Header */}
       <div className="p-4 border-b border-green-200 flex justify-between items-center bg-green-100">
         <h1 className="font-semibold text-green-800">
-          Cart Items ({cartItems.length})
+          Cart Items ({cartItems?.length})
         </h1>
         <button
           onClick={onClose}
@@ -21,9 +43,8 @@ const Cart = ({ onClose, isOpen, cartItems = [] }) => {
         </button>
       </div>
 
-      {/* Cart Items */}
       <div className="flex-1 overflow-y-auto p-4 space-y-3">
-        {cartItems.length > 0 ? (
+        {cartItems?.length > 0 ? (
           cartItems.map((item) => (
             <div
               key={item.id}

@@ -8,7 +8,7 @@ const CartCard = ({ product, onIncrease, onDecrease, onRemove }) => {
       {/* IMAGE */}
       <div className="w-24 h-24 flex-shrink-0">
         <img
-          src={product.image}
+          src={product.imageUrl}
           alt={product.name}
           className="w-full h-full object-cover rounded-md"
         />
